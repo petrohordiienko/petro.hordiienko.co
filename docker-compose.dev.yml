@@ -1,0 +1,15 @@
+services:
+  web:
+    build:
+      target: dev
+    image: hordiienko-web:dev
+    command:
+      - sh
+      - -c
+      - bun install && exec bun --bun next dev -H 0.0.0.0
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    environment:
+      WATCHPACK_POLLING: "true"

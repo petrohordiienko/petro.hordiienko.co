@@ -1,0 +1,11 @@
+name: ph-landing
+
+services:
+  web:
+    build:
+      context: .
+      target: prod
+    image: hordiienko-web:latest
+    ports:
+      - "${PORT:-3000}:3000"
+    restart: unless-stopped

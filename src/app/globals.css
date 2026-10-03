@@ -1,0 +1,205 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    background-color: var(--color-surface);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility focus-ring-night {
+  &:focus-visible {
+    outline: 2px solid var(--color-night-accent);
+    outline-offset: 2px;
+  }
+}
+
+@utility pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+@utility pb-footer {
+  padding-bottom: calc(1.75rem + env(safe-area-inset-bottom, 0px));
+}
+
+@utility min-h-hero {
+  min-height: clamp(620px, 92svh, 940px);
+}
+
+@utility min-h-hero-sm {
+  min-height: 760px;
+}
+
+@utility grid-rows-hero {
+  grid-template-rows: auto 1fr auto;
+}
+
+@utility grid-cols-sec-head {
+  grid-template-columns: 240px 1fr;
+}
+
+@utility grid-cols-contact {
+  grid-template-columns: 1.25fr 0.75fr;
+}
+
+@utility bg-hero {
+  background-image:
+    radial-gradient(60% 70% at 72% 45%, rgb(79 179 156 / 0.13), transparent 70%),
+    radial-gradient(40% 40% at 10% 100%, rgb(240 182 90 / 0.06), transparent 70%);
+}
+
+@utility hero-grid {
+  background-image:
+    linear-gradient(to right, rgb(238 236 230 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(238 236 230 / 0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(80% 80% at 60% 45%, #000 30%, transparent 80%);
+}
+
+@utility hero-cursor {
+  display: inline-block;
+  width: 0.38em;
+  height: 0.085em;
+  margin-left: 0.08em;
+  border-radius: 3px;
+  background-color: var(--color-night-amber);
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-night-foreground);
+}
+
+@utility rise-delay {
+  animation-delay: calc(var(--i, 0) * 55ms + 120ms);
+}
+
+@utility kinetic-solid {
+  display: inline-block;
+  transform: translateY(calc(var(--p, 0) * -0.12em)) scale(calc(1 + var(--p, 0) * 0.05));
+  color: color-mix(
+    in oklab,
+    var(--color-night-foreground),
+    var(--color-night-amber) calc(var(--p, 0) * 100%)
+  );
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 0.28s;
+}
+
+@utility kinetic-outline {
+  display: inline-block;
+  transform: translateY(calc(var(--p, 0) * -0.12em)) scale(calc(1 + var(--p, 0) * 0.05));
+  color: color-mix(in oklab, transparent, var(--color-night-amber) calc(var(--p, 0) * 100%));
+  -webkit-text-stroke: 1.5px
+    color-mix(
+      in oklab,
+      var(--color-night-foreground),
+      var(--color-night-amber) calc(var(--p, 0) * 100%)
+    );
+  transition:
+    transform 0.28s cubic-bezier(0.2, 0.7, 0.2, 1),
+    color 0.28s;
+}
+
+@utility marquee-mask {
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+@utility spot-glow {
+  background-image: radial-gradient(
+    560px circle at var(--mx, 72%) var(--my, 38%),
+    rgb(240 182 90 / 0.16),
+    rgb(79 179 156 / 0.1) 42%,
+    transparent 72%
+  );
+}
+
+@utility spot-grid {
+  background-image:
+    linear-gradient(to right, rgb(238 236 230 / 0.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(238 236 230 / 0.16) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(
+    300px circle at var(--mx, 72%) var(--my, 38%),
+    #000,
+    transparent 70%
+  );
+}
+
+@utility spot-orb {
+  background-image: radial-gradient(closest-side, rgb(79 179 156 / 0.22), transparent);
+}
+
+@utility reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  &[data-in] {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: opacity 0.4s;
+  }
+
+  @media (scripting: none) {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility mock-browser {
+  width: 640px;
+  height: 400px;
+}
+
+@utility mock-phone {
+  width: 220px;
+  height: 440px;
+}
+
+@utility grid-cols-sec-step {
+  grid-template-columns: auto 1fr;
+}
+
+@utility grid-rows-fill {
+  grid-template-rows: auto 1fr;
+}
+
+@utility grid-rows-fill-last {
+  grid-template-rows: 1fr auto;
+}
+
+@utility auto-rows-bento {
+  grid-auto-rows: minmax(15.5rem, auto);
+}
